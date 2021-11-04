@@ -1,21 +1,49 @@
 import { Component } from "react";
 import './App.css';
-import SpotFetch from "./components/SpotFetch";
-
 class App extends Component {
+
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      spots: [],
+    };
+  }
+
+  //GET windchecker spots
+  componentDidMount() {
+
+    var requestOptions = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    var getSpotsUrl = "https://api.riedmann.rocks/windchecker/items/spots";
+
+    fetch(getSpotsUrl, requestOptions)
+      .then(response => response.json())
+      .then(jsonData => {
+        this.setState({ spots: jsonData.data })
+      })
+      .catch(error => alert('error', error));
   }
 
   render() {
     return (
       <div className="App">
-      
-          <SpotFetch />
-       
-      </div>
-    );
+        <h1>WINDCHECKER SPOTS</h1>
+        <div>
+          <ul>
+            {
+              this.state.spots.map((spot) => (
+                <li key={spot.id}>{spot.name}</li>
+              ))
+            }
+          </ul >
+        </div >
+      </div >
+    )
   }
 }
 
