@@ -2,4 +2,19 @@
     background-color: rgb(61, 61, 61);
     color: white;
     padding:21px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .infoIcons{
+    margin-right: 13px;
+  }
+
+  .infoIcons:hover{
+    cursor: pointer;
+  }
+
+  .listIcon:hover{
+    cursor: pointer;
   }
