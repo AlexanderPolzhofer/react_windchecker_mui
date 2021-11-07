@@ -11,13 +11,21 @@ class Navbar extends React.Component {
         this.state = {}
     }
 
+    urlORFWeather = () => {
+        return "https://wetter.orf.at/vorarlberg/";
+    }
+
     getAllSpots = () => {
         alert("clicked");
     }
 
+    getWeatherFromORF = () => {
+        <iframe title="titleORF" >{this.urlORFWeather}</iframe>
+    }
+
     render() {
         return (<div className={NavbarStyle.navBar}>
-            <FormatListNumberedIcon className={NavbarStyle.listIcon} onClick={this.getAllSpots} />
+            <FormatListNumberedIcon className={NavbarStyle.listIcon} onClick={() => { alert("clicked") }} />
             <h1>WINDCHECKER</h1>
             <div >
                 <PhotoCameraIcon className={NavbarStyle.infoIcons} onClick={() => { alert("clicked") }} />
