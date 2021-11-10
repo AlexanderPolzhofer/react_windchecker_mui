@@ -23,13 +23,17 @@ class Navbar extends React.Component {
         <iframe title="titleORF" >{this.urlORFWeather}</iframe>
     }
 
+    doAlert = () => {
+        alert("doit:");
+    }
+
     render() {
         return (<div className={NavbarStyle.navBar}>
             <FormatListNumberedIcon className={NavbarStyle.listIcon} onClick={() => { alert("clicked") }} />
             <h1>WINDCHECKER</h1>
             <div >
                 <PhotoCameraIcon className={NavbarStyle.infoIcons} onClick={() => { alert("clicked") }} />
-                <CloudIcon className={NavbarStyle.infoIcons} onClick={() => { alert("clicked") }} />
+                <CloudIcon className={NavbarStyle.infoIcons} onClick={this.doAlert} />
             </div>
         </div>);
     }
