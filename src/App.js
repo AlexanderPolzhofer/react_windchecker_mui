@@ -31,15 +31,19 @@ class App extends Component {
     if (this.state.isWeatherVisible === true) {
       this.createWidgetObject();
     }
-
   }
 
   deleteWidget = () => {
-    let index = this.state.widgets.indexOf(1);
-    if (index > 0) {
-      index.splice(0);
+
+    this.state.widgets.splice(0);
+  }
+
+  widgetDeleteCheck = () => {
+    if (this.state.isWeatherVisible === true) {
+      this.deleteWidget();
     }
   }
+
 
   render() {
     return (
@@ -51,9 +55,8 @@ class App extends Component {
           <div key="1">{widget}</div>
         ))
         }
+        <p key="id">{this.widgetDeleteCheck()}</p>
       </div>
-
-
     )
   }
 }
