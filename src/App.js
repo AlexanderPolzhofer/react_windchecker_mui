@@ -2,6 +2,7 @@ import { Component } from 'react';
 import './App.css';
 import IFrameWidget from './components/IFrameWidget';
 import Navbar from './components/Navbar';
+import Slidebar from './components/Slidebar';
 import Spotlist from './components/Spotlist';
 
 class App extends Component {
@@ -10,8 +11,11 @@ class App extends Component {
     super(props);
     this.state = {
       isWeatherVisible: false,
+      isSpotlistVisible: false,
+      isSlidebarVisible: false,
       spots: [],
-      widgets: []
+      widgets: [],
+      slidebar: []
     };
   }
 
@@ -34,7 +38,6 @@ class App extends Component {
   }
 
   deleteWidget = () => {
-
     this.state.widgets.splice(0);
   }
 
@@ -44,18 +47,92 @@ class App extends Component {
     }
   }
 
+  setSpotlistVisible = () => {
+    this.setState({ isSpotlistVisible: true });
+    this.checkVisibilityFromSpotlist();
+  }
+
+  checkVisibilityFromSpotlist = () => {
+    if (this.state.isSpotlistVisible === true) {
+      this.getSpotlist();
+    } else {
+      alert("error: checkVisibilityFromSpotlist");
+    }
+  }
+  getSpotlist = () => {
+    let spotsWithSpotlist = this.state.spots;
+    spotsWithSpotlist.push(<Spotlist />);
+    this.setState({ spots: spotsWithSpotlist });
+  }
+
+  deleteSpotlistCheck = () => {
+    if (this.state.isSpotlistVisible === true) {
+      this.delteSpotlist();
+    }
+  }
+
+  delteSpotlist = () => {
+    this.state.spots.splice(0);
+  }
+
+  keepSingleSpotlistOnScreen = () => {
+    this.deleteSpotlistCheck();
+  }
+
+  keepSingleIFrameWidgetOnScreen = () => {
+    this.widgetDeleteCheck();
+  }
+
+  /*<h1>visible: {this.state.isWeatherVisible.toString()} </h1>*/
+  setSlidebarVisible = () => {
+    this.setState({ isSlidebarVisible: true });
+    this.checkVisibilityFromSlidebar();
+  }
+
+  checkVisibilityFromSlidebar = () => {
+    if (this.state.isSlidebarVisible === true) {
+      this.getSlidebar();
+    }
+  }
+
+  getSlidebar = () => {
+    let slidebar = this.state.slidebar;
+    slidebar.push(<Slidebar />);
+    this.setState({ slidebar: slidebar });
+  }
+
+  deleteSlidebar = () => {
+    this.state.slidebar.splice(0);
+  }
+
+  keepSingleSlidebarOnScreen = () => {
+    this.deleteSlidebar();
+  }
 
   render() {
     return (
       <div className="App">
-        <Navbar weatherStatus={() => this.setWeatherVisible()} />
-        <Spotlist />
-        <h1>visible: {this.state.isWeatherVisible.toString()} </h1>
+        <Navbar weatherStatus={() => this.setWeatherVisible()} getSpotlist={() => this.setSpotlistVisible()} getSlideshow={() => this.setSlidebarVisible()} />
+
         {this.state.widgets.map((widget) => (
-          <div key="1">{widget}</div>
+          <div key="1" className="weatherORF">{widget}</div>
         ))
         }
-        <p key="id">{this.widgetDeleteCheck()}</p>
+
+        {this.state.spots.map((spotlist) => (
+          <div key="2">{spotlist}</div>
+        ))
+        }
+
+        {this.state.slidebar.map((slidebar) => (
+          <div key="3">{slidebar}</div>
+        ))
+        }
+
+        {this.keepSingleSpotlistOnScreen()}
+        {this.keepSingleIFrameWidgetOnScreen()}
+        {this.keepSingleSlidebarOnScreen()}
+
       </div>
     )
   }

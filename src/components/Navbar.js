@@ -3,33 +3,34 @@ import NavbarStyle from './Navbar.module.css';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import CloudIcon from '@mui/icons-material/Cloud';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import HomeIcon from '@mui/icons-material/Home';
 
 
 class Navbar extends React.Component {
     constructor(props) {
         super(props);
-        // this.setWeatherVisible = this.setWeatherVisible.bind(this);
         this.state = {}
     }
 
-
-
-    getAllSpots = () => {
-        alert("clicked");
+    getAllSpotsInAPP = () => {
+        this.props.getSpotlist();
     }
-
-
 
     getWeatherStatusFromNavbar = () => {
         this.props.weatherStatus();
     }
 
+    connectingWithHomeIcon = () => {
+        this.props.getSlideshow();
+    }
+
     render() {
         return (<div className={NavbarStyle.navBar}>
-            <FormatListNumberedIcon className={NavbarStyle.listIcon} onClick={() => { alert("clicked") }} />
+            <HomeIcon className={NavbarStyle.homeIcon} onClick={this.connectingWithHomeIcon} />
             <h1>WINDCHECKER</h1>
             <div >
-                <PhotoCameraIcon className={NavbarStyle.infoIcons} onClick={() => { alert("clicked") }} />
+                <FormatListNumberedIcon className={NavbarStyle.infoIcons} onClick={this.getAllSpotsInAPP} />
+                <PhotoCameraIcon className={NavbarStyle.infoIcons} onClick={() => { alert("clicked photo icon") }} />
                 <CloudIcon className={NavbarStyle.infoIcons} onClick={this.getWeatherStatusFromNavbar} />
             </div>
         </div>);
