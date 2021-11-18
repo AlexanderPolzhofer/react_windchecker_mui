@@ -21,7 +21,7 @@ class App extends Component {
 
   setWeatherVisible = () => {
     this.setState({ isWeatherVisible: true });
-    this.checkVisibility();
+    this.createWidgetObject();
   }
 
   createWidgetObject = () => {
@@ -29,12 +29,6 @@ class App extends Component {
     let id = 1;
     widgets.push(<IFrameWidget url="https://wetter.orf.at/vorarlberg/" id={id} />);
     this.setState({ widgets: widgets });
-  }
-
-  checkVisibility = () => {
-    if (this.state.isWeatherVisible === true) {
-      this.createWidgetObject();
-    }
   }
 
   deleteWidget = () => {
@@ -49,16 +43,10 @@ class App extends Component {
 
   setSpotlistVisible = () => {
     this.setState({ isSpotlistVisible: true });
-    this.checkVisibilityFromSpotlist();
+    this.getSpotlist();
+    
   }
 
-  checkVisibilityFromSpotlist = () => {
-    if (this.state.isSpotlistVisible === true) {
-      this.getSpotlist();
-    } else {
-      alert("error: checkVisibilityFromSpotlist");
-    }
-  }
   getSpotlist = () => {
     let spotsWithSpotlist = this.state.spots;
     spotsWithSpotlist.push(<Spotlist />);
@@ -86,13 +74,7 @@ class App extends Component {
   /*<h1>visible: {this.state.isWeatherVisible.toString()} </h1>*/
   setSlidebarVisible = () => {
     this.setState({ isSlidebarVisible: true });
-    this.checkVisibilityFromSlidebar();
-  }
-
-  checkVisibilityFromSlidebar = () => {
-    if (this.state.isSlidebarVisible === true) {
-      this.getSlidebar();
-    }
+    this.getSlidebar();
   }
 
   getSlidebar = () => {
